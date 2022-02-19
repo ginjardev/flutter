@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:layout/main.dart';
+import 'package:layout/title.dart';
+import 'package:layout/textSection.dart';
+import 'package:layout/buttonSection.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
     return MaterialApp(
       title: 'Layout Demo',
       theme: ThemeData(
@@ -34,11 +38,20 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          
+        child: ListView(
+          children: [
+            Image.asset('images/lake.jpg',
+            width: 600,
+            height: 240,
+            fit: BoxFit.cover,
+            //scale: 1.0,
+            ),
+            titleSection,
+            buttonSection,
+            textSection,
+          ],
         ),
       ),
-      
     );
   }
 }
