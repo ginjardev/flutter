@@ -18,15 +18,12 @@ Widget titleText =  Container(
         //width: 400,
         child: Text(
           """
-          Pavlova is a meringue-based dessert named after 
-          the Russian ballerina Anna Pavlova. 
+          Pavlova is a meringue-based dessert named 
+          after the Russian ballerina Anna Pavlova. 
           It has a crisp crust and soft, light inside, 
           usually topped with fruit and whipped cream.
           """,
           softWrap: true,
-          style: TextStyle(
-            //fontSize: 20,
-          ),
         ),
       ),
     ],

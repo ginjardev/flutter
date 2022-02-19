@@ -29,14 +29,14 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 600,
           child: Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(20)
             ),
             child: Column(
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)
                     ),
                   child: Image.asset(
                   'images/pavlova.jpg',

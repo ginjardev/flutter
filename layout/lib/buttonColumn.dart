@@ -5,7 +5,10 @@ Column buttonColumn(Color color, IconData icon, String label) {
     mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(icon, color: color,),
+      Icon(
+        icon,
+        color: color,
+      ),
       Container(
         margin: const EdgeInsets.only(top: 8),
         child: Text(
