@@ -45,7 +45,9 @@ class _RandomWordsState extends State<RandomWords> {
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, i) {
         if (i.isOdd) {
-          return const Divider();
+          return const Divider(
+            thickness: 1.5,
+          );
         }
         final index = i ~/ 2;
         if (index >= _suggestions.length) {
