@@ -27,6 +27,8 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _textController = TextEditingController();
+  final List<ChatMessage> _messages = [];
+  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
+
+    var message = ChatMessage(
+      text: text,
+    );
+    setState(() {
+      _messages.insert(0, message);
+    });
+    _focusNode.requestFocus();
   }
 
   Widget _buildTextComposer() {
@@ -55,6 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
               onSubmitted: _handleSubmitted,
               decoration:
                   const InputDecoration.collapsed(hintText: 'Send a message'),
+              focusNode: _focusNode,
             ),
           ),
           Container(
@@ -75,7 +86,6 @@ class ChatMessage extends StatelessWidget {
 
   final String text;
   String _name = 'Your Name';
-
 
   @override
   Widget build(BuildContext context) {
