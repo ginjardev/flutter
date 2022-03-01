@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart'; 
 
 void main() {
   runApp(FriendlyChatApp());
 }
+
+final ThemeData kIOSTheme = ThemeData(
+  primarySwatch: Colors.orange,
+  primaryColor: Colors.grey[100],
+  primaryColorBrightness: Brightness.light,
+);
+
+final ThemeData kDefaultTheme = ThemeData(
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+      .copyWith(secondary: Colors.orangeAccent[400]),
+);
 
 class FriendlyChatApp extends StatelessWidget {
   const FriendlyChatApp({
@@ -13,7 +25,10 @@ class FriendlyChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "FriendlyChat",
-      home: ChatScreen(),
+      theme: defaultTargetPlatform == TargetPlatform.iOS 
+        ? kIOSTheme                                      
+        : kDefaultTheme,
+      home: const ChatScreen(),
     );
   }
 }
@@ -29,6 +44,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final _textController = TextEditingController();
   final List<ChatMessage> _messages = [];
   final FocusNode _focusNode = FocusNode();
+  bool _isComposing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +52,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Text('FriendlyChat'),
         centerTitle: true,
+        elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
       ),
       body: Column(
         children: [
@@ -60,8 +77,10 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   void _handleSubmitted(String text) {
     _textController.clear();
-
-    var message = ChatMessage(
+    setState(() {
+      _isComposing = false;
+    });
+    ChatMessage message = ChatMessage(
       text: text,
       animationController: AnimationController(
         duration: const Duration(microseconds: 700),
@@ -84,16 +103,23 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           Flexible(
             child: TextField(
               controller: _textController,
-              onSubmitted: _handleSubmitted,
+              onSubmitted: _isComposing ? _handleSubmitted : null,
               decoration:
                   const InputDecoration.collapsed(hintText: 'Send a message'),
               focusNode: _focusNode,
+              onChanged: (text) {
+                setState(() {
+                  _isComposing = text.isNotEmpty;
+                });
+              },
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 4.0),
             child: IconButton(
-              onPressed: () => _handleSubmitted(_textController.text),
+              onPressed: _isComposing
+                  ? () => _handleSubmitted(_textController.text)
+                  : null,
               icon: Icon(Icons.send),
             ),
           )
@@ -141,18 +167,20 @@ class ChatMessage extends StatelessWidget {
                 child: Text(_name[0]),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _name,
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: Text(text),
-                )
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _name,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 5.0),
+                    child: Text(text),
+                  )
+                ],
+              ),
             )
           ],
         ),
