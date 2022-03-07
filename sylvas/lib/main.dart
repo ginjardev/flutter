@@ -34,67 +34,70 @@ class _HorizonsAppState extends State<HorizonsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-                title: Text("Slivers"),
-                pinned: true,
-                centerTitle: true,
-                expandedHeight: 200,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset(
-                    "images/black.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.add_circle),
-                    tooltip: 'Add new entry',
-                    onPressed: () {
-                      setState(() {
-                        length++;
-                      });
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.remove_circle),
-                    tooltip: 'Add new entry',
-                    onPressed: () {
-                      setState(() {
-                        length--;
-                      });
-                    },
-                  ),
-                ]),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 7),
-                  decoration: BoxDecoration(
-                    color: index.isOdd? Colors.blueGrey : Colors.teal,
-                    borderRadius:BorderRadius.all(Radius.circular(12))),
-                  height: 150,
-                  child: Center(
-                    child: Text(
-                      '${index}',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+    return SafeArea(
+      child: Scaffold(
+          // appBar: AppBar(
+          //   title: Text(widget.title),
+          // ),
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                  title: Text("Slivers"),
+                  pinned: true,
+                  centerTitle: true,
+                  expandedHeight: 200,
+                  backgroundColor: Color.fromARGB(255, 155, 241, 74),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image.asset(
+                      "images/black.jpg",
+                      fit: BoxFit.cover,
                     ),
                   ),
-                );
-              },
-                childCount: length,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.add_circle),
+                      tooltip: 'Add new entry',
+                      onPressed: () {
+                        setState(() {
+                          length++;
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.remove_circle),
+                      tooltip: 'Add new entry',
+                      onPressed: () {
+                        setState(() {
+                          length--;
+                        });
+                      },
+                    ),
+                  ]),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                    decoration: BoxDecoration(
+                      color: index.isOdd? Colors.blueGrey : Colors.teal,
+                      borderRadius:BorderRadius.all(Radius.circular(12))),
+                    height: 150,
+                    child: Center(
+                      child: Text(
+                        '${index}',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                  childCount: length,
+                ),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 }
