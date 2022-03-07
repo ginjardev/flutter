@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -28,37 +30,71 @@ class HorizonsApp extends StatefulWidget {
 }
 
 class _HorizonsAppState extends State<HorizonsApp> {
+  int length = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text('SliverAppBar'),
-            backgroundColor: Colors.green,
-            expandedHeight: 200.0,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset('images/black.jpg', fit: BoxFit.cover),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+                title: Text("Slivers"),
+                pinned: true,
+                centerTitle: true,
+                expandedHeight: 200,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Image.asset(
+                    "images/black.jpg",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.add_circle),
+                    tooltip: 'Add new entry',
+                    onPressed: () {
+                      setState(() {
+                        length++;
+                      });
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.remove_circle),
+                    tooltip: 'Add new entry',
+                    onPressed: () {
+                      setState(() {
+                        length--;
+                      });
+                    },
+                  ),
+                ]),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 7),
+                  decoration: BoxDecoration(
+                    color: index.isOdd? Colors.blueGrey : Colors.teal,
+                    borderRadius:BorderRadius.all(Radius.circular(12))),
+                  height: 150,
+                  child: Center(
+                    child: Text(
+                      '${index}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                );
+              },
+                childCount: length,
+              ),
             ),
-          ),
-          SliverFixedExtentList(
-            itemExtent: 150.0,
-            delegate: SliverChildListDelegate(
-              [
-                Container(color: Colors.red),
-                Container(color: Colors.purple),
-                Container(color: Colors.green),
-                Container(color: Colors.orange),
-                Container(color: Colors.yellow),
-                Container(color: Colors.pink),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }
