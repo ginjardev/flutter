@@ -45,7 +45,19 @@ class _ListingAppState extends State<ListingApp> {
                 color: const Color(0xff008000),
                 height: 100.0,
                 alignment: Alignment.center,
-                child: const Text('Fixed Height Content'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(
+                        Icons.navigate_before,
+                        size: 34,
+                      ),
+                    ),
+                    const Text("Some Fixed Text")
+                  ],
+                ),
               ),
               Container(
                 color: Color.fromARGB(255, 0, 41, 128),
@@ -75,7 +87,7 @@ class _ListingAppState extends State<ListingApp> {
                 color: Color.fromARGB(255, 66, 0, 128),
                 height: 300.0,
                 alignment: Alignment.center,
-                child: const Text('Fixed Height Content'),
+                child: const Text('Scroll up to go back'),
               ),
             ],
           ),

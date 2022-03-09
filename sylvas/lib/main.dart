@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: const ListingApp(),
+      home: const HorizonsApp(title: 'Slivers'),
     );
   }
 }
@@ -69,6 +69,14 @@ class _HorizonsAppState extends State<HorizonsApp> {
                     setState(() {
                       length--;
                     });
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.navigate_next),
+                  tooltip: 'Next',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const ListingApp()));
                   },
                 ),
               ]),
