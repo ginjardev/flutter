@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   leading: Icon(
                     Icons.message
                   ),
-                  title: Text("Message"),
+                  title: Text("Messages"),
                 ),
                 ListTile(
                   leading: Icon(
