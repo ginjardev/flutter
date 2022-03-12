@@ -44,10 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView(
             children: [
               TextButton(
-                  style: TextButton.styleFrom(onSurface: Colors.greenAccent),
+                  style: TextButton.styleFrom(onSurface: Color.fromRGBO(105, 240, 174, 1)),
                   onPressed: () {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyGrid())
+                      MaterialPageRoute(builder: (context) => const MyGrid())
                     );
                   },
                   child: Text("Next Page")),
