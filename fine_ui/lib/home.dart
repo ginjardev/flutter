@@ -1,4 +1,7 @@
+import 'package:fine_ui/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:fine_ui/wallet.dart';
+import 'package:fine_ui/default.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -10,7 +13,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int _currentIndex = 0;
 
   void onTappedItem(int index) {
@@ -18,6 +20,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _currentIndex = index;
     });
   }
+
+  List<Widget> myWidgets = [
+    Frame(),
+    Wallet(),
+    Profile(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,72 +42,45 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 85,
                 child: DrawerHeader(
-                  child: Text(
-                    "Menu",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white
-                    ),
-                  )
-                ),
+                    child: Text(
+                  "Menu",
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                )),
               ),
               ListTile(
-                leading: Icon(
-                  color: Colors.black,
-                  Icons.notifications
-
-                ),
+                leading: Icon(color: Colors.black, Icons.notifications),
                 title: Text(
                   "Notifications",
-                  style: TextStyle(
-                    fontSize: 19,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 19, color: Colors.white),
                 ),
               ),
               ListTile(
-                leading: Icon(
-                  color: Colors.black,
-                  Icons.inbox
-                ),
+                leading: Icon(color: Colors.black, Icons.inbox),
                 title: Text(
                   "Inbox",
-                  style: TextStyle(
-                    fontSize: 19,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 19, color: Colors.white),
                 ),
               ),
               ListTile(
-                leading: Icon(
-                  color: Colors.black,
-                  Icons.settings
-                ),
+                leading: Icon(color: Colors.black, Icons.settings),
                 title: Text(
                   "Settings",
-                  style: TextStyle(
-                    fontSize: 19,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 19, color: Colors.white),
                 ),
               ),
               ListTile(
-                leading: Icon(
-                  color: Colors.black,
-                  Icons.logout
-                ),
+                leading: Icon(color: Colors.black, Icons.logout),
                 title: Text(
                   "Logout",
-                  style: TextStyle(
-                    fontSize: 19,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 19, color: Colors.white),
                 ),
               ),
             ],
           ),
         ),
-        body: Container(),
+        body: Center(
+          child: myWidgets[_currentIndex]
+        ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.blueGrey,
           selectedItemColor: Colors.green[400],
@@ -111,10 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 label: "Home"),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.account_balance_wallet
-                ),
-                label: "Wallet"),
+                icon: Icon(Icons.account_balance_wallet), label: "Wallet"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.account_circle,
