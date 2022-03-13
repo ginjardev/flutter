@@ -31,23 +31,79 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.blueGrey,
           child: ListView(
             children: const [
-              DrawerHeader(
-                child: Text(
-                  "Menu",
+              SizedBox(
+                height: 85,
+                child: DrawerHeader(
+                  child: Text(
+                    "Menu",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white
+                    ),
+                  )
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  color: Colors.black,
+                  Icons.notifications
+
+                ),
+                title: Text(
+                  "Notifications",
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 19,
                     color: Colors.white
                   ),
-
-                )
-              )
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  color: Colors.black,
+                  Icons.inbox
+                ),
+                title: Text(
+                  "Inbox",
+                  style: TextStyle(
+                    fontSize: 19,
+                    color: Colors.white
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  color: Colors.black,
+                  Icons.settings
+                ),
+                title: Text(
+                  "Settings",
+                  style: TextStyle(
+                    fontSize: 19,
+                    color: Colors.white
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  color: Colors.black,
+                  Icons.logout
+                ),
+                title: Text(
+                  "Logout",
+                  style: TextStyle(
+                    fontSize: 19,
+                    color: Colors.white
+                  ),
+                ),
+              ),
             ],
           ),
         ),
         body: Container(),
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.blueGrey,
           selectedItemColor: Colors.green[400],
-          unselectedItemColor: Colors.blueGrey,
+          unselectedItemColor: Colors.grey[50],
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(
