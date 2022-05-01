@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<Model>(
+    return ChangeNotifierProvider<Model>(
         create: (context) => Model(),
         child: MaterialApp(
           home: Scaffold(
@@ -20,18 +20,7 @@ class MyApp extends StatelessWidget {
             ),
             body: Row(
               children: [
-                Container(
-                  color: Colors.blueGrey,
-                  child: Consumer<Model>(
-                    builder: (context, value, child) {
-                      return ElevatedButton(
-                          onPressed: () {
-                            value.changeText();
-                          },
-                          child: Text("Click Me"));
-                    },
-                  ),
-                ),
+                MyButton(),
                 Container(
                   height: 100,
                   width: 150,
@@ -46,5 +35,19 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ));
+  }
+}
+
+class MyButton extends StatelessWidget {
+  const MyButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final mymodel = Provider.of<Model>(context, listen: false);
+    return ElevatedButton(
+          onPressed: () {
+            mymodel.changeText();
+          },
+          child: const Text("Click Me"));
   }
 }
