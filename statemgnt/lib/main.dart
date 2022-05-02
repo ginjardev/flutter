@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:statemgnt/model.dart';
-
+import 'package:statemgnt/screenOne.dart';
+import 'package:statemgnt/parent.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(const ParentClass());
 }
 
 class MyApp extends StatelessWidget {
